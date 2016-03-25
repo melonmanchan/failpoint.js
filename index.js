@@ -9,8 +9,16 @@ function listPackages(callback) {
 }
 
 listPackages(function (err, out) {
-    console.log(out);
-    out.map(function (val) {
-        console.log(val);
-    })
+    //console.log(out);
+    var namesOnly = out.reduce(function (outArr, val) {
+        var arr = val.split('node_modules/');
+
+        if (arr.length > 1) {
+            outArr.push(arr.pop());
+        }
+
+        return outArr;
+    }, []);
+
+    console.log(namesOnly);
 })
